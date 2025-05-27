@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import newsFeed from "../../../public/news-feed.png";
+import newsFeed from "../../public/news-feed.png";
 import { SearchIcon, AlignLeftIcon } from "lucide-react";
 
 const NavbarCom = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
@@ -29,7 +29,7 @@ const NavbarCom = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
             {/* <li>
             <UserIcon />
           </li> */}
-            <li>
+            <li className="md:block hidden">
               <SearchIcon />
             </li>
             <li className="md:hidden block">

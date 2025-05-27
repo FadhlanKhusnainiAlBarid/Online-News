@@ -3,20 +3,11 @@ import { useEffect } from "react";
 import { HR } from "flowbite-react";
 import { useAppSelector, useAppDispatch, useAppStore } from "@/lib/hooks";
 import { fetchNews } from "@/lib/features/action/newsAction";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
-export default function Home() {
-  const pathname = usePathname();
-  const router = useRouter();
+export default function Pages() {
   const dispatch = useAppDispatch();
   const { news } = useAppSelector((state) => state.news);
-
-  useEffect(() => {
-    // console.log(pathname);
-    if (pathname === "/") {
-      router.push("/home");
-    }
-  }, []);
 
   useEffect(() => {
     dispatch(fetchNews());
