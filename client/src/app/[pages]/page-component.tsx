@@ -2,25 +2,17 @@
 import { useEffect } from "react";
 import { useAppSelector, useAppDispatch, useAppStore } from "@/lib/hooks";
 import { fetchNews } from "@/lib/features/action/newsAction";
-import { usePathname, useRouter } from "next/navigation";
+import RowNews from "@/components/row-news";
 
-export default function Home() {
-  const pathname = usePathname();
-  const router = useRouter();
+export default function PageComponent({ params }: { params: string }) {
   const dispatch = useAppDispatch();
   const { news } = useAppSelector((state) => state.news);
 
   useEffect(() => {
-    if (pathname === "/") {
-      router.push("/home");
+    if (news.section !== params) {
+      dispatch(fetchNews(params));
     }
-  }, []);
-
-  useEffect(() => {
-    if (!news.section) {
-      dispatch(fetchNews("home"));
-    }
-  }, [dispatch]);
+  }, [dispatch, params, news]);
 
   return (
     <div className="container max-w-7xl mx-auto px-5 py-2 space-y-3 md:space-y-4">
@@ -31,6 +23,9 @@ export default function Home() {
         <span className="text-xs lg:text-sm text-gray-500">
           Tuesday, 27 May
         </span>
+      </div>
+      <div>
+        <RowNews />
       </div>
     </div>
   );

@@ -1,8 +1,14 @@
+export interface News {
+  section: string;
+  results: any[];
+}
+
+export interface Status {
+  status: string;
+  message: string;
+}
+
 export interface NewsState {
-  news: any[];
-  isLoading: boolean;
-  isStatus: {
-    status: string;
-    message: string;
-  };
+  news: News;
+  isStatus: Status;
 }
