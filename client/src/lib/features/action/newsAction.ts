@@ -14,7 +14,12 @@ export const fetchNews =
         }
       );
       const data = await response.json();
-      dispatch(setNews(data));
+      dispatch(
+        setNews({
+          section: section,
+          results: data.results,
+        })
+      );
     } catch (error: any) {
       console.error("Error fetching news:", error);
       dispatch(setIsStatus({ status: "error", message: error.message }));

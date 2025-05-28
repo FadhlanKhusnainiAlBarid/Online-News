@@ -14,6 +14,10 @@ export default function PageComponent({ params }: { params: string }) {
     }
   }, [dispatch, params, news]);
 
+  useEffect(() => {
+    console.log(news);
+  }, [news]);
+
   return (
     <div className="container max-w-7xl mx-auto px-5 py-2 space-y-3 md:space-y-4">
       <div>
