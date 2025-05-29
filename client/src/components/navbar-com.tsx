@@ -22,7 +22,7 @@ const NavbarCom = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
             />
             <ul className="md:flex hidden list-none gap-5 text-base font-semibold font-nunito-sans text-gray-600 *:cursor-pointer *:active:scale-95">
               <li>
-                <Link href="/">Home</Link>
+                <Link href="/home">Home</Link>
               </li>
               <li>
                 <Link href="/arts">Arts</Link>

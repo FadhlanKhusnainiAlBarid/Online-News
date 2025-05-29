@@ -50,9 +50,7 @@ function ModalSearch({
           )}
         </form>
       </div>
-      <ModalBody>
-        <RowNews />
-      </ModalBody>
+      <ModalBody>{/* <RowNews news={news} /> */}</ModalBody>
     </Modal>
   );
 }
