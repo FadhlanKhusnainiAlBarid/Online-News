@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { NewsState, News, Status } from "@/type";
 
 export const newsSlice = createSlice({
   name: "news",

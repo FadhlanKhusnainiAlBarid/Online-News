@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, UserIcon, SearchIcon, HouseIcon, UserPlus } from "lucide-react";
+import { Menu, UserIcon, SearchIcon, UserPlus } from "lucide-react";
 import {
   Drawer,
   DrawerHeader,
@@ -10,6 +10,8 @@ import {
   SidebarItems,
   TextInput,
 } from "flowbite-react";
+import { Category } from "@/lib/features/action/newsAction";
+import Link from "next/link";
 
 const SideBarCom = ({
   open,
@@ -19,7 +21,7 @@ const SideBarCom = ({
   setOpen: (open: boolean) => void;
 }) => {
   return (
-    <Drawer open={open} onClose={() => setOpen(false)}>
+    <Drawer open={open} onClose={() => setOpen(false)} className="bg-white">
       <DrawerHeader title="MENU" titleIcon={() => <Menu />} />
       <DrawerItems>
         <Sidebar
@@ -40,15 +42,15 @@ const SideBarCom = ({
               </form>
               <SidebarItems>
                 <SidebarItemGroup>
-                  <SidebarItem href="/" icon={HouseIcon}>
-                    Home
-                  </SidebarItem>
-                  <SidebarItem href="/">Arts</SidebarItem>
-                  <SidebarItem href="/">AutoMobiles</SidebarItem>
-                  <SidebarItem href="/">Book/Review</SidebarItem>
-                  <SidebarItem href="/">Business</SidebarItem>
-                  <SidebarItem href="/">Fashion</SidebarItem>
-                  <SidebarItem href="/">Food</SidebarItem>
+                  {Category.map((category) => (
+                    <Link
+                      key={category.name}
+                      href={category.href}
+                      onClick={() => setOpen(false)}
+                    >
+                      <SidebarItem>{category.name}</SidebarItem>
+                    </Link>
+                  ))}
                 </SidebarItemGroup>
                 <SidebarItemGroup>
                   <SidebarItem href="/" icon={UserIcon}>
