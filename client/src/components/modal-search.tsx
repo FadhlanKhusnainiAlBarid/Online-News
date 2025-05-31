@@ -25,17 +25,15 @@ function ModalSearch({
         dispatch(fetchSearchNews(search, page - 1));
       } else if (search.length > 2 && search !== prevSearch) {
         setPage(1);
-        dispatch(fetchSearchNews(search, page - 1));
-      } else if (search.length > 2 && search !== prevSearch) {
         setprevSearch(search);
-        dispatch(fetchSearchNews(search, page));
+        dispatch(fetchSearchNews(search, 0));
       } else if (search.length === 0) {
         setPage(1);
         dispatch(setSearchNews([]));
       }
     }, 1250);
     return () => clearTimeout(sub);
-  }, [search, page, dispatch, prevSearch]);
+  }, [search, page, dispatch]);
 
   useEffect(() => {
     console.log(searchNews);
