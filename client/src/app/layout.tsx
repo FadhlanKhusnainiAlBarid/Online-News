@@ -34,8 +34,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${nunitoSans.variable} antialiased`}
       >
-        <NavSection />
-        <StoreProvider>{children}</StoreProvider>
+        <StoreProvider>
+          <NavSection />
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, UserIcon, SearchIcon, UserPlus } from "lucide-react";
+import { Menu, UserIcon, SearchIcon, UserPlus, TextSearch } from "lucide-react";
 import {
   Drawer,
   DrawerHeader,
@@ -11,7 +11,9 @@ import {
   TextInput,
 } from "flowbite-react";
 import { Category } from "@/lib/features/action/newsAction";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAppSelector, useAppDispatch, useAppStore } from "@/lib/hooks";
+// import { searchNews, TextSearch } from "@/lib/features/action/newsAction";
 
 const SideBarCom = ({
   open,
@@ -20,8 +22,20 @@ const SideBarCom = ({
   open: boolean;
   setOpen: (open: boolean) => void;
 }) => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { search } = useAppSelector((state) => state.news);
+
+  // const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
+  //   // dispatch(TextSearch(e.target.value));
+  // };
+
   return (
-    <Drawer open={open} onClose={() => setOpen(false)} className="bg-white">
+    <Drawer
+      open={open}
+      onClose={() => setOpen(false)}
+      className="md:hidden block bg-white"
+    >
       <DrawerHeader title="MENU" titleIcon={() => <Menu />} />
       <DrawerItems>
         <Sidebar
@@ -38,19 +52,25 @@ const SideBarCom = ({
                   placeholder="Search"
                   required
                   size={32}
+                  // value={search}
+                  // onChange={(e) => handleSearch(e)}
                 />
               </form>
               <SidebarItems>
                 <SidebarItemGroup>
-                  {Category.map((category) => (
-                    <Link
-                      key={category.name}
-                      href={category.href}
-                      onClick={() => setOpen(false)}
-                    >
-                      <SidebarItem>{category.name}</SidebarItem>
-                    </Link>
-                  ))}
+                  {Category.map((category) => {
+                    return (
+                      <SidebarItem
+                        onClick={() => {
+                          setOpen(false);
+                          router.push(category.href);
+                        }}
+                        key={category.name}
+                      >
+                        {category.name}
+                      </SidebarItem>
+                    );
+                  })}
                 </SidebarItemGroup>
                 <SidebarItemGroup>
                   <SidebarItem href="/" icon={UserIcon}>

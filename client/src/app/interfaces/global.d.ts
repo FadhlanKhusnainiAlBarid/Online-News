@@ -9,6 +9,19 @@ interface News {
   results: any[];
 }
 
+interface SearchNews {
+  docs: any[];
+  meta: {
+    hits: number;
+    offset: number;
+  };
+}
+
+interface IsLoading {
+  news: boolean;
+  searchNews: boolean;
+}
+
 interface Status {
   status: string;
   message: string;
@@ -16,5 +29,8 @@ interface Status {
 
 interface NewsState {
   news: News;
+  isLoading: IsLoading;
   isStatus: Status;
+  searchNews: SearchNews;
+  search: string;
 }

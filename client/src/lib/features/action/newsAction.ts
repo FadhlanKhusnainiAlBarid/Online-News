@@ -1,5 +1,11 @@
 import { AppDispatch } from "../../store";
-import { setIsStatus, setNews } from "@/lib/features/counter/newsSlice";
+import {
+  setIsStatus,
+  setIsLoading,
+  setNews,
+  setSearchNews,
+  setSearch,
+} from "@/lib/features/counter/newsSlice";
 
 const API_KEY_NYTIMES: string | undefined = process.env.API_KEY_NYTIMES;
 
@@ -50,9 +56,9 @@ export const Category: Category[] = [
     section: "insider",
   },
   {
-    name: "Megazine",
-    href: "/megazine",
-    section: "megazine",
+    name: "Magazine",
+    href: "/magazine",
+    section: "magazine",
   },
   {
     name: "Movies",
@@ -140,6 +146,8 @@ export const fetchNews =
   (section: string) =>
   async (dispatch: AppDispatch): Promise<void> => {
     try {
+      dispatch(setIsLoading({ news: true, searchNews: false }));
+      dispatch(setIsStatus({ status: "", message: "" }));
       const response = await fetch(
         `https://api.nytimes.com/svc/topstories/v2/${
           Category.find(
@@ -154,11 +162,50 @@ export const fetchNews =
       dispatch(
         setNews({
           section: section,
-          results: data.results || [],
+          results: data.results ? data.results : [],
         })
       );
     } catch (error: any) {
       console.error("Error fetching news:", error);
       dispatch(setIsStatus({ status: "error", message: error.message }));
+    } finally {
+      // delay 3 seconds
+      setTimeout(() => {
+        dispatch(setIsLoading({ news: false, searchNews: false }));
+      }, 3000);
     }
   };
+
+export const fetchSearchNews =
+  (search: string, page: number) =>
+  async (dispatch: AppDispatch): Promise<void> => {
+    try {
+      dispatch(setIsLoading({ news: false, searchNews: true }));
+      dispatch(setIsStatus({ status: "", message: "" }));
+      const response = await fetch(
+        `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&page=${page}&api-key=${API_KEY_NYTIMES}`
+      );
+      const data = await response.json();
+      dispatch(
+        setSearchNews({
+          docs: data.response.docs ? data.response.docs : [],
+          meta: {
+            hits: data.response.metadata.hits,
+            offset: data.response.metadata.offset,
+          },
+        })
+      );
+    } catch (error: any) {
+      console.error("Error fetching news:", error);
+      dispatch(setIsStatus({ status: "error", message: error.message }));
+    } finally {
+      // delay 3 seconds
+      // setTimeout(() => {
+      dispatch(setIsLoading({ news: false, searchNews: false }));
+      // }, 3000);
+    }
+  };
+
+export const TextSearch = (search: string) => (dispatch: AppDispatch) => {
+  dispatch(setSearch(search));
+};
