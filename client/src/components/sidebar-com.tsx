@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, UserIcon, SearchIcon, UserPlus, TextSearch } from "lucide-react";
+import { Menu, UserIcon, SearchIcon, UserPlus } from "lucide-react";
 import {
   Drawer,
   DrawerHeader,
@@ -12,8 +12,6 @@ import {
 } from "flowbite-react";
 import { Category } from "@/lib/features/action/newsAction";
 import { useRouter } from "next/navigation";
-import { useAppSelector, useAppDispatch, useAppStore } from "@/lib/hooks";
-// import { searchNews, TextSearch } from "@/lib/features/action/newsAction";
 
 const SideBarCom = ({
   open,
@@ -23,13 +21,6 @@ const SideBarCom = ({
   setOpen: (open: boolean) => void;
 }) => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
-  const { search } = useAppSelector((state) => state.news);
-
-  // const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
-  //   // dispatch(TextSearch(e.target.value));
-  // };
-
   return (
     <Drawer
       open={open}
@@ -52,8 +43,6 @@ const SideBarCom = ({
                   placeholder="Search"
                   required
                   size={32}
-                  // value={search}
-                  // onChange={(e) => handleSearch(e)}
                 />
               </form>
               <SidebarItems>

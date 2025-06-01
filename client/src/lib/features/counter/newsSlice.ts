@@ -35,7 +35,7 @@ export const newsSlice = createSlice({
     setIsStatus: (state, action: PayloadAction<Status>) => {
       state.isStatus = action.payload;
     },
-    setSearchNews: (state, action: PayloadAction<any>) => {
+    setSearchNews: (state, action: PayloadAction<SearchNews>) => {
       state.searchNews = action.payload;
     },
     setSearch: (state, action: PayloadAction<string>) => {

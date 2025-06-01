@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { useAppSelector, useAppDispatch, useAppStore } from "@/lib/hooks";
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import { fetchNews } from "@/lib/features/action/newsAction";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -14,13 +14,13 @@ export default function Home() {
     if (pathname === "/") {
       router.push("/home");
     }
-  }, []);
+  }, [pathname, router]);
 
   useEffect(() => {
     if (!news.section) {
       dispatch(fetchNews("home"));
     }
-  }, [dispatch]);
+  }, [dispatch, news.section]);
 
   return (
     <div className="container max-w-7xl mx-auto px-5 py-2 space-y-3 md:space-y-4">

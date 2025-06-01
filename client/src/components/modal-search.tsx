@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal, ModalBody, TextInput, Pagination } from "flowbite-react";
 import { SearchIcon, X } from "lucide-react";
 import { modalTheme, textInputTheme } from "@/custom-theme";
-import { useAppSelector, useAppDispatch, useAppStore } from "@/lib/hooks";
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import RowNews from "@/components/row-news";
 import { fetchSearchNews, TextSearch } from "@/lib/features/action/newsAction";
 import { setSearchNews } from "@/lib/features/counter/newsSlice";
@@ -29,15 +29,11 @@ function ModalSearch({
         dispatch(fetchSearchNews(search, 0));
       } else if (search.length === 0) {
         setPage(1);
-        dispatch(setSearchNews([]));
+        dispatch(setSearchNews({ docs: [], meta: { hits: 0, offset: 0 } }));
       }
     }, 1250);
     return () => clearTimeout(sub);
-  }, [search, page, dispatch]);
-
-  useEffect(() => {
-    console.log(searchNews);
-  }, [searchNews]);
+  }, [search, page, dispatch, prevSearch]);
   return (
     <Modal
       dismissible
@@ -75,9 +71,9 @@ function ModalSearch({
       <ModalBody>
         {searchNews.docs?.length > 0 && (
           <>
-            {searchNews.docs?.map((news: any) => (
+            {searchNews.docs?.map((news: SearchNewsResult, index) => (
               <RowNews
-                key={news.web_uri}
+                key={index}
                 url={news.web_url}
                 title={news.headline.main}
                 abstract={news.abstract}
@@ -88,7 +84,7 @@ function ModalSearch({
             ))}
           </>
         )}
-        {searchNews.meta?.hits && (
+        {searchNews.meta?.hits > 0 && (
           <div className="flex overflow-x-auto sm:justify-center">
             <Pagination
               currentPage={page}

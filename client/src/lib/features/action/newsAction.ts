@@ -165,7 +165,7 @@ export const fetchNews =
           results: data.results ? data.results : [],
         })
       );
-    } catch (error: any) {
+    } catch (error: Error | any) {
       console.error("Error fetching news:", error);
       dispatch(setIsStatus({ status: "error", message: error.message }));
     } finally {
@@ -195,7 +195,7 @@ export const fetchSearchNews =
           },
         })
       );
-    } catch (error: any) {
+    } catch (error: Error | any) {
       console.error("Error fetching news:", error);
       dispatch(setIsStatus({ status: "error", message: error.message }));
     } finally {

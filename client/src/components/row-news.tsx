@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { HR } from "flowbite-react";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
+import Image from "next/image";
+import NotFoundImage from "../../public/no-image-found.png";
 
-TimeAgo.addDefaultLocale(en);
+TimeAgo.addLocale(en);
 
 function RowNews({
   url,
@@ -32,10 +34,12 @@ function RowNews({
         <h2 className="h-fit group-hover:underline group-hover:underline-offset-1 text-base lg:text-lg text-black leading-6">
           {abstract}
         </h2>
-        <img
+        <Image
           className="w-24 h-24 rounded-lg"
-          src={imageUrl || ""}
-          alt={caption || ""}
+          src={imageUrl ? imageUrl : NotFoundImage}
+          alt={caption ? caption : "no-image-found"}
+          width={100}
+          height={100}
         />
       </div>
       <span className="text-xs text-gray-600">

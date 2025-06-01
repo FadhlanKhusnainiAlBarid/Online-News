@@ -1,17 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useAppSelector, useAppDispatch, useAppStore } from "@/lib/hooks";
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import { fetchNews } from "@/lib/features/action/newsAction";
 import RowNews from "@/components/row-news";
 import { Button } from "flowbite-react";
-import { useRouter } from "next/navigation";
 import LoadingNews from "@/app/[pages]/loading-news";
 import Swal from "sweetalert2";
 import { SweetAlertIcon } from "sweetalert2";
 
 export default function PageComponent({ params }: { params: string }) {
   const dispatch = useAppDispatch();
-  const router = useRouter();
   const { news, isStatus, isLoading } = useAppSelector((state) => state.news);
   const [showPerRow, setShowPerRow] = useState(5);
 
@@ -26,10 +24,6 @@ export default function PageComponent({ params }: { params: string }) {
       Swal.fire("Info", isStatus.message, isStatus.status as SweetAlertIcon);
     }
   }, [isStatus]);
-
-  useEffect(() => {
-    console.log(news.results.length);
-  }, [news]);
 
   return (
     <div className="container max-w-7xl mx-auto px-5 py-2 space-y-3 md:space-y-4">
@@ -75,8 +69,4 @@ export default function PageComponent({ params }: { params: string }) {
       </div>
     </div>
   );
-}
-
-function Loading() {
-  return <h2>🌀 Loading...</h2>;
 }
