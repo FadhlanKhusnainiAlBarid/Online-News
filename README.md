@@ -1,2 +1,50 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19637948&assignment_repo_type=AssignmentRepo)
-# FERN-P3-S1GC01
+## Deskripsi
+
+Project ini merupakan aplikasi client yang dikembangkan menggunakan stack FERN (Firebase, Express.js, React, Node.js). Aplikasi ini berfungsi sebagai antarmuka pengguna untuk mengelola data dan berinteraksi dengan backend.
+
+## Fitur
+
+- Navigasi responsif
+- Integrasi dengan backend API
+
+## Instalasi
+
+1. Clone repository ini:
+   ```bash
+   git clone https://github.com/username/repo.git
+   ```
+2. Masuk ke direktori project:
+   ```bash
+   cd repo
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Jalankan aplikasi:
+   ```bash
+   npm start
+   ```
+
+## Struktur Folder
+
+```
+src/
+├── components/
+├── pages/
+├── services/
+├── App.js
+└── index.js
+```
+
+## Konfigurasi
+
+Pastikan untuk mengatur variabel lingkungan yang diperlukan pada file `.env` sesuai kebutuhan aplikasi.
+
+## Kontribusi
+
+Kontribusi sangat terbuka! Silakan buat pull request atau buka issue untuk diskusi lebih lanjut.
+
+## Lisensi
+
+Project ini menggunakan lisensi MIT.
