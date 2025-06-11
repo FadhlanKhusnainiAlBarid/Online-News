@@ -44,7 +44,3 @@ Pastikan untuk mengatur variabel lingkungan yang diperlukan pada file `.env` ses
 ## Kontribusi
 
 Kontribusi sangat terbuka! Silakan buat pull request atau buka issue untuk diskusi lebih lanjut.
-
-## Lisensi
-
-Project ini menggunakan lisensi MIT.
